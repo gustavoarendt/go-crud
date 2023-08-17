@@ -1,0 +1,52 @@
+{{define "Index"}}
+
+{{template "_head"}}
+
+<body>
+    {{template "_menu"}}
+    <div class="container">
+        <section class="card">
+            <div>
+                <table class="table table-striped table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Descrição</th>
+                            <th>Preço</th>
+                            <th>Quantidade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{range .}}
+                        <tr>
+                            <td>{{.Name}}</td>
+                            <td>{{.Description}}</td>
+                            <td>{{.Price}}</td>
+                            <td>{{.Amount}}</td>
+                            <td><a href="/edit?id={{.Id}}" class="btn btn-info">Editar</a></td>
+                            <td><button onclick="confirmDelete('{{.Id}}')" class="btn btn-danger">Deletar</button></td>
+                        </tr>
+                        {{end}}
+                    </tbody>
+                </table>
+                <div>
+                    <a href="/new" class="btn btn-primary">Create Product</a>
+                </div>
+            </div>
+        </section>
+        <div>
+        </div>
+    </div>
+</body>
+
+<script>
+    const confirmDelete = (id) => {
+        const response = "Tem certeza que deseja apagar este produto?";
+        if (confirm(response)) {
+            window.location = `/delete?id=${id}`;
+        }
+    }
+</script>
+
+</html>
+{{end}}
